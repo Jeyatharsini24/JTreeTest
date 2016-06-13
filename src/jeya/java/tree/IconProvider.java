@@ -6,6 +6,7 @@ public class IconProvider {
 	public static final String TREE_TREE = "TREE.TREE.png";
 	public static final String TREE_ROOT = "TREE.ROOT.png";
 	public static final String TREE_NODE = "TREE.NODE.png";
+	public static final String TREE_LEAF = "TREE.LEAF.png";
 
 	public ImageIcon getIcon(String iconName)
 	{

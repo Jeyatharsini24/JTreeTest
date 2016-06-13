@@ -19,20 +19,19 @@ public class TreeModel extends DefaultTreeModel {
 	private static final long serialVersionUID = 1919065491509752313L;
 
 	private DefaultMutableTreeNode root;
-	ArrayList<UserObject>contactData;
+	ArrayList<UserObject>userData;
 	private static TreeModel modelInstance;
 
 	 private TreeModel()
 	  {
 	    super(null);
-	    contactData = new ArrayList<UserObject>();
-	    contactData.add(new UserObject("1.0.1","Node 1","0"));
-	    contactData.add(new UserObject("1.0.2","Node 2","0"));
-	    contactData.add(new UserObject("1.0.3","Node 3","0"));
-	    contactData.add(new UserObject("1.0.4","Node 4","0"));
-	    contactData.add(new UserObject("1.0.5","Node 5","0"));
-	    contactData.add(new UserObject("1.0.6","Node 6","0"));
-
+	    userData = new ArrayList<UserObject>();
+	    userData.add(new UserObject("1.0.1","Node 1","0"));
+	    userData.add(new UserObject("1.0.2","Node 2","0"));
+	    userData.add(new UserObject("1.0.3","Node 3","0"));
+	    userData.add(new UserObject("1.0.4","Node 4","0"));
+	    userData.add(new UserObject("1.0.5","Node 5","0"));
+	    userData.add(new UserObject("1.0.6","Node 6","0"));
 	  }
 	 
 	 public static TreeModel getInstance()
@@ -47,9 +46,13 @@ public class TreeModel extends DefaultTreeModel {
 	 public void loadData()
 	 {
 		 	DefaultMutableTreeNode root = new DefaultMutableTreeNode(new UserObjectWrapper(new UserObject("1.0","Root","0")));
-			for(int i = 0; i < contactData.size(); i++)
+			for(int i = 0; i < userData.size(); i++)
 			{
-				root.add(new DefaultMutableTreeNode(new UserObjectWrapper(contactData.get(i))));
+				DefaultMutableTreeNode temp = new DefaultMutableTreeNode(new UserObjectWrapper(userData.get(i)));
+				String leafString = 1 + "." + "0." + i + ".1";
+				DefaultMutableTreeNode tempUserObject = new DefaultMutableTreeNode(new UserObject(leafString,"Node 1","0"));
+				temp.add(tempUserObject);
+				root.add(temp);
 			}
 			this.root = root;
 			setRoot(root);

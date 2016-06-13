@@ -23,11 +23,13 @@ public class TreeNodeRenderer extends DefaultTreeCellRenderer {
 
 	ImageIcon m_node;
 	ImageIcon m_root;
+	ImageIcon m_leaf;
 	
 	public TreeNodeRenderer()
 	{
 		m_root = new IconProvider().getIcon(IconProvider.TREE_ROOT);
 		m_node = new IconProvider().getIcon(IconProvider.TREE_NODE);
+		m_leaf = new IconProvider().getIcon(IconProvider.TREE_LEAF);
 	}
 	
 	@Override
@@ -39,18 +41,23 @@ public class TreeNodeRenderer extends DefaultTreeCellRenderer {
 		
 		DefaultMutableTreeNode nodeToRender = (DefaultMutableTreeNode)(value);
 		Object nodeObject = nodeToRender.getUserObject();
+		DefaultMutableTreeNode root = (DefaultMutableTreeNode)(tree.getModel().getRoot());
 		
 		if (nodeObject instanceof UserObjectWrapper) {
 			UserObjectWrapper data = (UserObjectWrapper)nodeObject;
 			setText(data.getDisplayName());
 		}
-		if(!((DefaultMutableTreeNode)value).isRoot())
+		if(((DefaultMutableTreeNode)value).isRoot())
 		{
-		this.setIcon(m_node);
+			this.setIcon(m_root);
+		}
+		else if(root.isNodeChild(nodeToRender))
+		{
+			this.setIcon(m_node);
 		}
 		else
 		{
-		this.setIcon(m_root);
+			this.setIcon(m_leaf);
 		}
 		return this;
 	}
