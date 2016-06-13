@@ -50,7 +50,7 @@ public class TreeModel extends DefaultTreeModel {
 			{
 				DefaultMutableTreeNode temp = new DefaultMutableTreeNode(new UserObjectWrapper(userData.get(i)));
 				String leafString = 1 + "." + "0." + i + ".1";
-				DefaultMutableTreeNode tempUserObject = new DefaultMutableTreeNode(new UserObject(leafString,"Node 1","0"));
+				DefaultMutableTreeNode tempUserObject = new DefaultMutableTreeNode(new UserObjectWrapper(new UserObject(leafString,"Node 1","0")));
 				temp.add(tempUserObject);
 				root.add(temp);
 			}

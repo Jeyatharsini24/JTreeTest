@@ -40,8 +40,6 @@ public class UserObjectWrapper {
 		this.userObject = userObject;
 	}
 
-
-
 	public String getDisplayName() {
 		return displayName;
 	}
