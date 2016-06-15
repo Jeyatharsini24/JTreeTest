@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JTree;
+import javax.swing.border.Border;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
@@ -35,5 +38,13 @@ public class TreePanel extends JPanel {
 			public void valueChanged(TreeSelectionEvent arg0) {
 				System.out.println("Miyaav");
 			}});
+		
+		TitledBorder title1;
+		Border raisedbevel1;
+		raisedbevel1 = BorderFactory.createRaisedBevelBorder();
+		title1 = BorderFactory.createTitledBorder(raisedbevel1, "");
+		title1.setTitlePosition(TitledBorder.BELOW_BOTTOM);
+		
+		tree.setBorder(title1);
 	}
 }
