@@ -9,7 +9,7 @@ public class UserObject {
 	private String id; 
 	private String displayName;
 	private String arg3;
-	UserObject(String id, String displayName, String arg3)
+	public UserObject(String id, String displayName, String arg3)
 	{
 		this.id = id;
 		this.displayName = displayName;

@@ -14,7 +14,7 @@ import javax.swing.tree.DefaultTreeModel;
  * Added to tree using setModel method.
  */
 
-public class TreeModel extends DefaultTreeModel {
+public class TreeModel extends DefaultTreeModel{
 
 	private static final long serialVersionUID = 1919065491509752313L;
 

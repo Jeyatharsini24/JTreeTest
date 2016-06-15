@@ -10,9 +10,8 @@ package jeya.java.tree;
  * 1. Display name of the node in tree : toString() method of the object which is stored in
  * tree will be invoked internally.
  * 2. So virtual reference of the object will be shown in user interface.
- * 3. To avoid this we should override the toString() method in user object class.
- * 4. If override toString() method to return display name in user object class, 
- * getRoot() method will return the display name instead for reference. Problem.
+ * 3. To avoid this we should use displayName in user object class.
+ * 4. Having displayName in actual userObject is not favourable
  */
 public class UserObjectWrapper {
 	private UserObject userObject;
@@ -27,8 +26,6 @@ public class UserObjectWrapper {
 		this.userObject = userObject;
 		this.displayName = userObject.getDisplayName();
 	}
-
-
 
 	public UserObjectWrapper(UserObject userObject, String displayName) {
 		super();
