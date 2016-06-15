@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,6 +17,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.JTableHeader;
 
 import jeya.java.data.Entity;
+import jeya.java.dummy.TableDataProvider;
 
 public class TablePanel extends JPanel implements Observer{
 	JTable table;
@@ -31,9 +33,13 @@ public class TablePanel extends JPanel implements Observer{
 		EvenOddRenderer renderer = new EvenOddRenderer();
 		table.setDefaultRenderer(Object.class, renderer);
 		table.setModel(model);
-		model.addEntity(new Entity("1","arg1","arg2","arg3"));
-		model.addEntity(new Entity("1","arg4","arg5","arg6"));
-
+		
+		ArrayList<Entity>tableDummyData = TableDataProvider.getDummyEntities();
+		for(int i = 0; i < tableDummyData.size(); i++)
+		{
+			model.addEntity(tableDummyData.get(i));
+		}
+		
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true); 
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
@@ -60,7 +66,6 @@ public class TablePanel extends JPanel implements Observer{
 
 	@Override
 	public void update(Observable paramObservable, Object paramObject) {
-		// TODO Auto-generated method stub
 		System.out.println(paramObject);
 	}
 }

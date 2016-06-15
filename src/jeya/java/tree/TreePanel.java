@@ -8,31 +8,35 @@ import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTree;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
 
-import jeya.java.table.TablePanel;
+import jeya.java.data.UserObject;
 
 public class TreePanel extends JPanel {
 	JTree tree;
 	JeyaTreeSelectionListener jeyaTreeSelectionListener;
 	public TreePanel()
 	{
+		JScrollPane scrollPane = new JScrollPane();
 		tree = new JTree();
 		tree.setCellRenderer(new TreeNodeRenderer());
 		this.setLayout(new GridBagLayout());
 		tree.setBackground(new Color(251,237,202));
-		GridBagConstraints gbc_tree = new GridBagConstraints();
-		gbc_tree.fill = GridBagConstraints.BOTH;
-		gbc_tree.anchor = GridBagConstraints.LINE_START;
-		gbc_tree.weighty = 1.0;
-		gbc_tree.weightx = 1.0;
-		gbc_tree.gridy = 0;
-		gbc_tree.gridx = 0;
-		this.add(tree, gbc_tree);
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.anchor = GridBagConstraints.LINE_START;
+		gbc_scrollPane.weighty = 1.0;
+		gbc_scrollPane.weightx = 1.0;
+		gbc_scrollPane.gridy = 0;
+		gbc_scrollPane.gridx = 0;
+		this.add(scrollPane, gbc_scrollPane);
+		scrollPane.setViewportView(tree);
 		
 		tree.setModel(TreeModel.getInstance());
 		TreeModel.getInstance().loadData();
@@ -53,9 +57,15 @@ public class TreePanel extends JPanel {
 	{
 		@Override
 		public void valueChanged(TreeSelectionEvent paramTreeSelectionEvent) {
-			String selectedID = "Clicked";
-			setChanged();
-			notifyObservers(selectedID);
+	        DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
+			if(!selectedNode.isRoot())
+			{
+				UserObjectWrapper userObjectWrapper = (UserObjectWrapper) selectedNode.getUserObject();
+				UserObject userObject = userObjectWrapper.getUserObject();
+				String selectedID = userObject.getId();
+				setChanged();
+				notifyObservers(selectedID);	
+			}
 		}
 	}
 

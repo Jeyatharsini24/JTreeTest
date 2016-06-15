@@ -1,11 +1,13 @@
 package jeya.java.tree;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import jeya.java.data.UserObject;
+import jeya.java.dummy.TreeDataProvider;
 
 /**
  * 
@@ -21,20 +23,13 @@ public class TreeModel extends DefaultTreeModel{
 	private static final long serialVersionUID = 1919065491509752313L;
 
 	private DefaultMutableTreeNode root;
-	ArrayList<UserObject>userData;
+	Hashtable<String,UserObject>userData;
 	private static TreeModel modelInstance;
 
 	 private TreeModel()
-	  {
+	 {
 	    super(null);
-	    userData = new ArrayList<UserObject>();
-	    userData.add(new UserObject("1.0.1","Node 1","0"));
-	    userData.add(new UserObject("1.0.2","Node 2","0"));
-	    userData.add(new UserObject("1.0.3","Node 3","0"));
-	    userData.add(new UserObject("1.0.4","Node 4","0"));
-	    userData.add(new UserObject("1.0.5","Node 5","0"));
-	    userData.add(new UserObject("1.0.6","Node 6","0"));
-	  }
+	 }
 	 
 	 public static TreeModel getInstance()
 	 {
@@ -47,14 +42,23 @@ public class TreeModel extends DefaultTreeModel{
 	 
 	 public void loadData()
 	 {
+		    userData = TreeDataProvider.getDummyUserObjects();
 		 	DefaultMutableTreeNode root = new DefaultMutableTreeNode(new UserObjectWrapper(new UserObject("1.0","Root","0")));
-			for(int i = 0; i < userData.size(); i++)
+			
+		 	for(int i = 1; i < 7; i++)
 			{
-				DefaultMutableTreeNode temp = new DefaultMutableTreeNode(new UserObjectWrapper(userData.get(i)));
-				String leafString = 1 + "." + "0." + i + ".1";
-				DefaultMutableTreeNode tempUserObject = new DefaultMutableTreeNode(new UserObjectWrapper(new UserObject(leafString,"Node 1","0")));
-				temp.add(tempUserObject);
-				root.add(temp);
+				String key = "Child" + i;
+				UserObject tempChild = userData.get(key);
+				DefaultMutableTreeNode tempChildUserObject = new DefaultMutableTreeNode(new UserObjectWrapper(tempChild));
+				root.add(tempChildUserObject);
+				
+				for(int j = 1; j < 7; j++)
+				{
+					String _key = "Step" + i + ":" + j;
+					UserObject tempGrandChild = userData.get(key);
+					DefaultMutableTreeNode tempGrandChildUserObject = new DefaultMutableTreeNode(new UserObjectWrapper(tempGrandChild));
+					tempChildUserObject.add(tempGrandChildUserObject);
+				}
 			}
 			this.root = root;
 			setRoot(root);
