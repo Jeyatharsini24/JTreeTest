@@ -1,7 +1,7 @@
 package jeya.java.dummy;
 
+import jeya.java.data.UserObject;
 import jeya.java.tree.Tree;
-import jeya.java.tree.UserObject;
 
 public class TreeData {
 	private Tree<UserObject>tree;

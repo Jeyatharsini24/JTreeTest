@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
+import jeya.java.data.UserObject;
+
 /**
  * 
  * @author JJeyatharsini

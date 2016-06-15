@@ -1,6 +1,8 @@
 package jeya.java.tree;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 
 import javax.swing.ImageIcon;
 import javax.swing.JTree;
@@ -47,18 +49,27 @@ public class TreeNodeRenderer extends DefaultTreeCellRenderer {
 			UserObjectWrapper data = (UserObjectWrapper)nodeObject;
 			setText(data.getDisplayName());
 		}
+		// if root
 		if(((DefaultMutableTreeNode)value).isRoot())
 		{
 			this.setIcon(m_root);
+			this.setForeground(new Color(132,113,68));
 		}
+		// if direct child to root
 		else if(root.isNodeChild(nodeToRender))
 		{
 			this.setIcon(m_node);
+			this.setForeground(new Color(147,191,79));
 		}
+		// neither root or direct child
 		else
 		{
 			this.setIcon(m_leaf);
+			this.setForeground(new Color(92,167,62));
 		}
+		this.setBackgroundSelectionColor(new Color(207,205,22));
+		this.setBackgroundNonSelectionColor(new Color(235,219,35));
+		this.setFont(new Font("TimesRoman", Font.BOLD, 15));
 		return this;
 	}
 }

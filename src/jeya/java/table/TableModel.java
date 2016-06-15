@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.swing.table.DefaultTableModel;
 
+import jeya.java.data.Entity;
+
 public class TableModel extends DefaultTableModel{
 	private String[]column;
 	private ArrayList<Entity>instances;
@@ -23,5 +25,10 @@ public class TableModel extends DefaultTableModel{
 		row[1] = entity.getArg2();
 		row[2] = entity.getArg3();
 		addRow(row);
+	}
+	
+	void loadTable()
+	{
+		
 	}
 }

@@ -3,6 +3,8 @@ package jeya.java.tree;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -12,8 +14,11 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
+import jeya.java.table.TablePanel;
+
 public class TreePanel extends JPanel {
 	JTree tree;
+	JeyaTreeSelectionListener jeyaTreeSelectionListener;
 	public TreePanel()
 	{
 		tree = new JTree();
@@ -32,12 +37,8 @@ public class TreePanel extends JPanel {
 		tree.setModel(TreeModel.getInstance());
 		TreeModel.getInstance().loadData();
 		
-		tree.addTreeSelectionListener(new TreeSelectionListener(){
-
-			@Override
-			public void valueChanged(TreeSelectionEvent arg0) {
-				System.out.println("Miyaav");
-			}});
+		jeyaTreeSelectionListener = new JeyaTreeSelectionListener();
+		tree.addTreeSelectionListener(jeyaTreeSelectionListener);
 		
 		TitledBorder title1;
 		Border raisedbevel1;
@@ -46,5 +47,19 @@ public class TreePanel extends JPanel {
 		title1.setTitlePosition(TitledBorder.BELOW_BOTTOM);
 		
 		tree.setBorder(title1);
+	}
+	
+	class JeyaTreeSelectionListener extends Observable implements TreeSelectionListener
+	{
+		@Override
+		public void valueChanged(TreeSelectionEvent paramTreeSelectionEvent) {
+			String selectedID = "Clicked";
+			setChanged();
+			notifyObservers(selectedID);
+		}
+	}
+
+	public void addTreeSelectionChangeListeners(JPanel tablePanel) {
+		jeyaTreeSelectionListener.addObserver((Observer) tablePanel);
 	}
 }

@@ -1,4 +1,4 @@
-package jeya.java.tree;
+package jeya.java.data;
 
 /**
  * 

@@ -1,5 +1,7 @@
 package jeya.java.tree;
 
+import jeya.java.data.UserObject;
+
 /**
  * 
  * @author JJeyatharsini

@@ -1,20 +1,28 @@
-package jeya.java.table;
+package jeya.java.data;
 
 public class Entity {
 	private String arg1;
 	private String arg2;
 	private String arg3;
+	private String userObjectID;
 	
 	public Entity() {
 		super();
 	}
-	public Entity(String arg1, String arg2, String arg3) {
+	public Entity(String userObjectID,String arg1, String arg2, String arg3) {
 		super();
+		this.userObjectID = userObjectID;
 		this.arg1 = arg1;
 		this.arg2 = arg2;
 		this.arg3 = arg3;
 	}
 	
+	public String getUserObjectID() {
+		return userObjectID;
+	}
+	public void setUserObjectID(String userObjectID) {
+		this.userObjectID = userObjectID;
+	}
 	public String getArg1() {
 		return arg1;
 	}

@@ -43,6 +43,16 @@ public class TreeFrame extends JFrame {
 		gbc_mainPanel.gridx = 0;
 		getContentPane().add(mainPanel, gbc_mainPanel);
 		
+		tablePanel = new TablePanel();
+		GridBagConstraints gbc_tablePanel = new GridBagConstraints();
+		gbc_tablePanel.gridheight = 3;
+		gbc_tablePanel.fill = GridBagConstraints.BOTH;
+		gbc_tablePanel.weighty = 6.0;
+		gbc_tablePanel.weightx = 4.0;
+		gbc_tablePanel.gridy = 0;
+		gbc_tablePanel.gridx = 4;
+		mainPanel.add(tablePanel, gbc_tablePanel);
+		
 		treePanel = new TreePanel();
 		GridBagConstraints gbc_treePanel = new GridBagConstraints();
 		gbc_treePanel.anchor = GridBagConstraints.LINE_START;
@@ -55,15 +65,7 @@ public class TreeFrame extends JFrame {
 		gbc_treePanel.gridx = 0;
 		mainPanel.add(treePanel, gbc_treePanel);
 		
-		tablePanel = new TablePanel();
-		GridBagConstraints gbc_tablePanel = new GridBagConstraints();
-		gbc_tablePanel.gridheight = 3;
-		gbc_tablePanel.fill = GridBagConstraints.BOTH;
-		gbc_tablePanel.weighty = 6.0;
-		gbc_tablePanel.weightx = 4.0;
-		gbc_tablePanel.gridy = 0;
-		gbc_tablePanel.gridx = 4;
-		mainPanel.add(tablePanel, gbc_tablePanel);
+		treePanel.addTreeSelectionChangeListeners(tablePanel);
 		
 		editorPanel = new EditorPanel();
 		GridBagConstraints gbc_editorPanel = new GridBagConstraints();

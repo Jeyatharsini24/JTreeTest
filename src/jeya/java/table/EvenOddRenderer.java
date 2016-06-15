@@ -16,25 +16,28 @@ public class EvenOddRenderer implements TableCellRenderer {
 		Component renderer = DEFAULT_RENDERER.getTableCellRendererComponent(
 		        table, value, isSelected, hasFocus, row, column);
 		    ((JLabel) renderer).setOpaque(true);
-		    /*Color foreground = Color.black;
-		    Color background = Color.WHITE;*/
+		    Color foreground = Color.black;
+		    Color background = Color.WHITE;
 		    if (!isSelected) {
 		    	if (row % 2 == 1) {
-		    		//Color foreground = Color.black;
-		    		Color background = new Color(251,251,243);
-				    //renderer.setForeground(foreground);
+		    		foreground = Color.WHITE;
+		    		background = new Color(110,191,82);
+				    renderer.setForeground(foreground);
 				    renderer.setBackground(background);
 			      } 
 			     else {
-			        //Color foreground = Color.black;
-			    	 Color background = new Color(252,252,252);
+			         foreground = new Color(110,191,82);
+			    	 background = Color.WHITE;
 					 renderer.setBackground(background);
-			      }
+					 renderer.setForeground(foreground);
+			     }
 		    } 
-		    /*else {
-		    	foreground = Color.yellow;
-			    background = Color.green;
-		    }*/
+		    else {
+		    	foreground = Color.WHITE;
+			    background = new Color(247,122,46);
+			    renderer.setBackground(background);
+				renderer.setForeground(foreground);
+		    }
 		    return renderer;
 	}
 }
