@@ -37,17 +37,6 @@ public class TableModel extends DefaultTableModel{
 	}
 	
 	@Override
-	public int getRowCount() {
-	    return instances != null ? instances.size() : 0;
-	}
-
-	@Override
-	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return column.length;
-	}
-	
-	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Entity data = instances.get(rowIndex);
 	    switch (columnIndex) {
@@ -59,5 +48,17 @@ public class TableModel extends DefaultTableModel{
 		  return data.getArg3();
 	    }
 	    return "";
+	}
+	
+	// should override these two methods: internally invoked to show table
+	@Override
+	public int getRowCount() {
+	    return instances != null ? instances.size() : 0;
+	}
+
+	@Override
+	public int getColumnCount() {
+		// TODO Auto-generated method stub
+		return column.length;
 	}
 }

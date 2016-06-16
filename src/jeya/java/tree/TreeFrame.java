@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import jeya.java.model.EditorPanel;
+import jeya.java.model.NewButtonPanel;
 import jeya.java.table.TablePanel;
 
 /**
@@ -23,6 +24,7 @@ public class TreeFrame extends JFrame {
 	TreePanel treePanel;
 	TablePanel tablePanel;
 	EditorPanel editorPanel;
+	NewButtonPanel newButtonPanel;
 	JPanel mainPanel;
 
 	TreeFrame()
@@ -45,9 +47,11 @@ public class TreeFrame extends JFrame {
 		
 		tablePanel = new TablePanel();
 		GridBagConstraints gbc_tablePanel = new GridBagConstraints();
-		gbc_tablePanel.gridheight = 3;
+		gbc_tablePanel.anchor = GridBagConstraints.EAST;
+		gbc_tablePanel.gridwidth = 4;
 		gbc_tablePanel.fill = GridBagConstraints.BOTH;
-		gbc_tablePanel.weighty = 6.0;
+		gbc_tablePanel.gridheight = 9;
+		gbc_tablePanel.weighty = 9.0;
 		gbc_tablePanel.weightx = 4.0;
 		gbc_tablePanel.gridy = 0;
 		gbc_tablePanel.gridx = 4;
@@ -56,10 +60,10 @@ public class TreeFrame extends JFrame {
 		treePanel = new TreePanel();
 		GridBagConstraints gbc_treePanel = new GridBagConstraints();
 		gbc_treePanel.anchor = GridBagConstraints.LINE_START;
-		gbc_treePanel.gridheight = 6;
+		gbc_treePanel.gridheight = 13;
 		gbc_treePanel.gridwidth = 4;
-		gbc_treePanel.weighty = 1.0;
-		gbc_treePanel.weightx = 2.0;
+		gbc_treePanel.weighty = 9.0;
+		gbc_treePanel.weightx = 3.0;
 		gbc_treePanel.fill = GridBagConstraints.BOTH;
 		gbc_treePanel.gridy = 0;
 		gbc_treePanel.gridx = 0;
@@ -67,13 +71,26 @@ public class TreeFrame extends JFrame {
 		
 		treePanel.addTreeSelectionChangeListeners(tablePanel);
 		
+		newButtonPanel = new NewButtonPanel();
+		GridBagConstraints gbc_newButtonPanel = new GridBagConstraints();
+		gbc_newButtonPanel.gridwidth = 4;
+		gbc_newButtonPanel.anchor = GridBagConstraints.WEST;
+		gbc_newButtonPanel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_newButtonPanel.weighty = 2.0;
+		gbc_newButtonPanel.weightx = 4.0;
+		gbc_newButtonPanel.gridy = 9;
+		gbc_newButtonPanel.gridx = 4;
+		mainPanel.add(newButtonPanel,gbc_newButtonPanel);
+		
 		editorPanel = new EditorPanel();
 		GridBagConstraints gbc_editorPanel = new GridBagConstraints();
+		gbc_editorPanel.gridwidth = 4;
+		gbc_editorPanel.anchor = GridBagConstraints.EAST;
 		gbc_editorPanel.fill = GridBagConstraints.BOTH;
-		gbc_editorPanel.gridheight = 3;
-		gbc_editorPanel.weighty = 5.0;
+		gbc_editorPanel.gridheight = 2;
+		gbc_editorPanel.weighty = 2.0;
 		gbc_editorPanel.weightx = 4.0;
-		gbc_editorPanel.gridy = 3;
+		gbc_editorPanel.gridy = 10;
 		gbc_editorPanel.gridx = 4;
 		mainPanel.add(editorPanel, gbc_editorPanel);
 	}
