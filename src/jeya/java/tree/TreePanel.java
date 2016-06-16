@@ -69,7 +69,7 @@ public class TreePanel extends JPanel {
 		}
 	}
 
-	public void addTreeSelectionChangeListeners(JPanel tablePanel) {
-		jeyaTreeSelectionListener.addObserver((Observer) tablePanel);
+	public void addTreeSelectionChangeListeners(Observer tablePanel) {
+		jeyaTreeSelectionListener.addObserver(tablePanel);
 	}
 }

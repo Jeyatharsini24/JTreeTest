@@ -1,7 +1,8 @@
 package jeya.java.tree;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -51,11 +52,11 @@ public class TreeModel extends DefaultTreeModel{
 				UserObject tempChild = userData.get(key);
 				DefaultMutableTreeNode tempChildUserObject = new DefaultMutableTreeNode(new UserObjectWrapper(tempChild));
 				root.add(tempChildUserObject);
-				
-				for(int j = 1; j < 7; j++)
+	
+				for(int j = 1; j < 3; j++)
 				{
 					String _key = "Step" + i + ":" + j;
-					UserObject tempGrandChild = userData.get(key);
+					UserObject tempGrandChild = userData.get(_key);
 					DefaultMutableTreeNode tempGrandChildUserObject = new DefaultMutableTreeNode(new UserObjectWrapper(tempGrandChild));
 					tempChildUserObject.add(tempGrandChildUserObject);
 				}

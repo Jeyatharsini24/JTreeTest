@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,16 +11,17 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.JTableHeader;
-
-import jeya.java.data.Entity;
-import jeya.java.dummy.TableDataProvider;
 
 public class TablePanel extends JPanel implements Observer{
 	JTable table;
 	TableModel model;
+	private ListSelectionModel rowSelectionModel;
 	
 	public TablePanel()
 	{
@@ -33,12 +33,6 @@ public class TablePanel extends JPanel implements Observer{
 		EvenOddRenderer renderer = new EvenOddRenderer();
 		table.setDefaultRenderer(Object.class, renderer);
 		table.setModel(model);
-		
-		ArrayList<Entity>tableDummyData = TableDataProvider.getDummyEntities();
-		for(int i = 0; i < tableDummyData.size(); i++)
-		{
-			model.addEntity(tableDummyData.get(i));
-		}
 		
 		JScrollPane scrollPane = new JScrollPane(table);
 		table.setFillsViewportHeight(true); 
@@ -62,10 +56,18 @@ public class TablePanel extends JPanel implements Observer{
 		title1 = BorderFactory.createTitledBorder(loweredbevel1, "");
 		title1.setTitlePosition(TitledBorder.ABOVE_TOP);
 		scrollPane.setBorder(title1);
+		
+		rowSelectionModel = table.getSelectionModel();
+		rowSelectionModel.addListSelectionListener(new ListSelectionListener(){
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+		    	System.out.println("value has been clicked: " + table.getSelectedRow());
+			}});
 	}
 
 	@Override
 	public void update(Observable paramObservable, Object paramObject) {
-		System.out.println(paramObject);
+		model.loadTable(paramObject.toString());
 	}
 }

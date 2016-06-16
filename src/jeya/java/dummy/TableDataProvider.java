@@ -12,7 +12,7 @@ public class TableDataProvider {
 		tableDummyData = new ArrayList<Entity>();
 		for(int i = 1; i < 7; i++)
 		{
-			int random = (int)(Math.random() * 1000) % 6 + 1;
+			int random = (int)(Math.random() * 1000) % 4 + 1;
 			for(int j = 1; j < random; j++)
 			{
 				String userObjectID = "1.0." + i;
