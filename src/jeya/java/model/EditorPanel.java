@@ -16,6 +16,8 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import jeya.java.data.Entity;
+
 public class EditorPanel extends JPanel implements Observer{
 	JLabel userObjectIDLabel;
 	private JTextField textField;
@@ -53,7 +55,13 @@ public class EditorPanel extends JPanel implements Observer{
 		gbc_userObjectIDLabel.gridx = 0;
 		add(userObjectIDLabel, gbc_userObjectIDLabel);
 		
-		comboBox = new JComboBox();
+		comboBox = new JComboBox(new String[]{"1.0.1","1.0.1.1","1.0.1.2",
+				"1.0.2","1.0.2.1","1.0.2.2",
+				"1.0.3","1.0.3.1","1.0.3.2",
+				"1.0.4","1.0.4.1","1.0.4.2",
+				"1.0.5","1.0.5.1","1.0.5.2",
+				"1.0.6","1.0.6.1","1.0.6.2"
+				});
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.gridwidth = 2;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
@@ -171,6 +179,12 @@ public class EditorPanel extends JPanel implements Observer{
 	
 	@Override
 	public void update(Observable paramObservable, Object paramObject) {
-    	System.out.println("value has been clicked: " + paramObject);
+		Entity selectedEntity = (Entity)paramObject;
+		loadWithData(selectedEntity);
+	}
+
+	private void loadWithData(Entity selectedEntity) {
+		comboBox.setSelectedItem(selectedEntity.getUserObjectID());
+		//To continue
 	}
 }
