@@ -19,6 +19,11 @@ public class TableModel extends DefaultTableModel{
 		setColumnIdentifiers(column);
 	}
 	
+	Entity getEntityAt(int rowNumber)
+	{
+		return instances.get(rowNumber);
+	}
+	
 	void addEntity(Entity entity)
 	{
 		Object[]row = new Object[column.length];

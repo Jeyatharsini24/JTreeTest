@@ -1,28 +1,28 @@
 package jeya.java.model;
 
 import java.awt.Color;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
 
-public class EditorPanel extends JPanel {
+public class EditorPanel extends JPanel implements Observer{
 	JLabel userObjectIDLabel;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JLabel lblArg_2;
 	private JTextField textField_2;
-	private JLabel lblMiyaav;
+	private JLabel lblEditable;
 	private JButton btnDisableEdit;
 	private JButton btnSave;
 	private JButton btnDelete;
@@ -123,14 +123,14 @@ public class EditorPanel extends JPanel {
 		gbc_btnDisableEdit.gridy = 4;
 		add(btnDisableEdit, gbc_btnDisableEdit);
 		
-		lblMiyaav = new JLabel("Can Edit");
-		GridBagConstraints gbc_lblMiyaav = new GridBagConstraints();
-		gbc_lblMiyaav.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMiyaav.weighty = 1.0;
-		gbc_lblMiyaav.weightx = 1.0;
-		gbc_lblMiyaav.gridx = 2;
-		gbc_lblMiyaav.gridy = 4;
-		add(lblMiyaav, gbc_lblMiyaav);
+		lblEditable = new JLabel("Can Edit");
+		GridBagConstraints gbc_lblEditable = new GridBagConstraints();
+		gbc_lblEditable.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEditable.weighty = 1.0;
+		gbc_lblEditable.weightx = 1.0;
+		gbc_lblEditable.gridx = 2;
+		gbc_lblEditable.gridy = 4;
+		add(lblEditable, gbc_lblEditable);
 		
 		textField_2 = new JTextField();
 		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
@@ -167,5 +167,10 @@ public class EditorPanel extends JPanel {
 		gbc_btnClose.gridx = 2;
 		gbc_btnClose.gridy = 5;
 		add(btnClose, gbc_btnClose);
+	}
+	
+	@Override
+	public void update(Observable paramObservable, Object paramObject) {
+    	System.out.println("value has been clicked: " + paramObject);
 	}
 }

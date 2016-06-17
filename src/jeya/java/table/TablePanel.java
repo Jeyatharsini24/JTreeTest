@@ -18,10 +18,15 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.JTableHeader;
 
+import jeya.java.data.Entity;
+import jeya.java.listener.EditorPanel_NewButton_ChangeListener;
+
 public class TablePanel extends JPanel implements Observer{
-	JTable table;
-	TableModel model;
+	private JTable table;
+	private TableModel model;
 	private ListSelectionModel rowSelectionModel;
+	private EditorPanel_NewButton_ChangeListener rowPropertyChangeListener;
+	private JeyaListSelectionListener listSelectionListener;
 	
 	public TablePanel()
 	{
@@ -58,16 +63,30 @@ public class TablePanel extends JPanel implements Observer{
 		scrollPane.setBorder(title1);
 		
 		rowSelectionModel = table.getSelectionModel();
-		rowSelectionModel.addListSelectionListener(new ListSelectionListener(){
-
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-		    	System.out.println("value has been clicked: " + table.getSelectedRow());
-			}});
+		listSelectionListener = new JeyaListSelectionListener();
+		rowSelectionModel.addListSelectionListener(listSelectionListener);
+	}
+	
+	class JeyaListSelectionListener extends Observable implements ListSelectionListener
+	{
+		@Override
+		public void valueChanged(ListSelectionEvent e) {
+			int selectedRow = table.getSelectedRow();
+			if(selectedRow != -1) // if not selected
+			{
+				Entity entity = model.getEntityAt(selectedRow);
+				setChanged();
+				notifyObservers(entity);
+			}
+		}
 	}
 
 	@Override
 	public void update(Observable paramObservable, Object paramObject) {
 		model.loadTable(paramObject.toString());
+	}
+	
+	public void addTableRowSelectionListener(Observer editorPanel) {
+		listSelectionListener.addObserver(editorPanel);
 	}
 }

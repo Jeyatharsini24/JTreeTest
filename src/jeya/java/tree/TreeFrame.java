@@ -93,5 +93,7 @@ public class TreeFrame extends JFrame {
 		gbc_editorPanel.gridy = 10;
 		gbc_editorPanel.gridx = 4;
 		mainPanel.add(editorPanel, gbc_editorPanel);
+		
+		tablePanel.addTableRowSelectionListener(editorPanel);
 	}
 }
