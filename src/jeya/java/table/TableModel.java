@@ -27,17 +27,27 @@ public class TableModel extends DefaultTableModel{
 	void addEntity(Entity entity)
 	{
 		Object[]row = new Object[column.length];
-		row[0] = entity.getArg1();
-		row[1] = entity.getArg2();
-		row[2] = entity.getArg3();
+		row[0] = entity.getUserObjectID();
+		row[1] = entity.getArg1();
+		row[2] = entity.getArg2();
+		row[3] = entity.getArg3();
 		addRow(row);
 	}
 	
 	void loadTable(String userObjectID)
 	{
 		instances.clear();
-		ArrayList<Entity>dummyData = TableDataProvider.getDummyEntities();
-		instances = dummyData;
+		ArrayList<Entity>dummyData = TableDataProvider.getInstance().getDummyEntities();
+		ArrayList<Entity>filteredData = new ArrayList<Entity>();
+		for(int i = 0; i < dummyData.size(); i++)
+		{
+			Entity temp = dummyData.get(i);
+			if(temp.getUserObjectID().contains(userObjectID))
+			{
+				filteredData.add(temp);
+			}
+		}
+		instances = filteredData;
 		fireTableDataChanged();
 	}
 	
@@ -46,10 +56,12 @@ public class TableModel extends DefaultTableModel{
 		Entity data = instances.get(rowIndex);
 	    switch (columnIndex) {
 	    case 0:
-	      return data.getArg1();
+		  return data.getUserObjectID();
 	    case 1:
-	      return data.getArg2();
+	      return data.getArg1();
 	    case 2:
+	      return data.getArg2();
+	    case 3:
 		  return data.getArg3();
 	    }
 	    return "";

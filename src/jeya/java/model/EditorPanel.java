@@ -25,10 +25,7 @@ public class EditorPanel extends JPanel implements Observer{
 	private JLabel lblArg_2;
 	private JTextField textField_2;
 	private JLabel lblEditable;
-	private JButton btnDisableEdit;
-	private JButton btnSave;
-	private JButton btnDelete;
-	private JButton btnClose;
+	
 	private JComboBox comboBox;
 	public EditorPanel()
 	{
@@ -122,15 +119,6 @@ public class EditorPanel extends JPanel implements Observer{
 		add(textField_1, gbc_textField_1);
 		textField_1.setColumns(10);
 		
-		btnDisableEdit = new JButton("Disable Edit");
-		GridBagConstraints gbc_btnDisableEdit = new GridBagConstraints();
-		gbc_btnDisableEdit.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnDisableEdit.insets = new Insets(0, 0, 5, 5);
-		gbc_btnDisableEdit.anchor = GridBagConstraints.WEST;
-		gbc_btnDisableEdit.gridx = 0;
-		gbc_btnDisableEdit.gridy = 4;
-		add(btnDisableEdit, gbc_btnDisableEdit);
-		
 		lblEditable = new JLabel("Can Edit");
 		GridBagConstraints gbc_lblEditable = new GridBagConstraints();
 		gbc_lblEditable.insets = new Insets(0, 0, 5, 5);
@@ -149,42 +137,31 @@ public class EditorPanel extends JPanel implements Observer{
 		gbc_textField_2.gridy = 3;
 		add(textField_2, gbc_textField_2);
 		textField_2.setColumns(10);
-		
-		btnSave = new JButton("Save");
-		GridBagConstraints gbc_btnSave = new GridBagConstraints();
-		gbc_btnSave.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnSave.insets = new Insets(0, 0, 0, 5);
-		gbc_btnSave.anchor = GridBagConstraints.WEST;
-		gbc_btnSave.gridx = 0;
-		gbc_btnSave.gridy = 5;
-		add(btnSave, gbc_btnSave);
-		
-		btnDelete = new JButton("Delete");
-		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
-		gbc_btnDelete.insets = new Insets(0, 0, 0, 5);
-		gbc_btnDelete.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnDelete.anchor = GridBagConstraints.WEST;
-		gbc_btnDelete.gridx = 1;
-		gbc_btnDelete.gridy = 5;
-		add(btnDelete, gbc_btnDelete);
-		
-		btnClose = new JButton("Cancel");
-		GridBagConstraints gbc_btnClose = new GridBagConstraints();
-		gbc_btnClose.insets = new Insets(0, 0, 0, 5);
-		gbc_btnClose.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnClose.gridx = 2;
-		gbc_btnClose.gridy = 5;
-		add(btnClose, gbc_btnClose);
 	}
 	
 	@Override
 	public void update(Observable paramObservable, Object paramObject) {
 		Entity selectedEntity = (Entity)paramObject;
-		loadWithData(selectedEntity);
+		if(selectedEntity != null)
+		{
+			loadWithData(selectedEntity);
+		}
+		else
+		{
+			createNewData();
+		}
+	}
+
+	private void createNewData() {
+		textField.setText("");
+		textField_1.setText("");
+		textField_2.setText("");
 	}
 
 	private void loadWithData(Entity selectedEntity) {
 		comboBox.setSelectedItem(selectedEntity.getUserObjectID());
-		//To continue
+		textField.setText(selectedEntity.getArg1());
+		textField_1.setText(selectedEntity.getArg2());
+		textField_2.setText(selectedEntity.getArg3());
 	}
 }

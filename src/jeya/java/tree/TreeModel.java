@@ -43,7 +43,7 @@ public class TreeModel extends DefaultTreeModel{
 	 
 	 public void loadData()
 	 {
-		    userData = TreeDataProvider.getDummyUserObjects();
+		    userData = TreeDataProvider.getInstance().getDummyUserObjects();
 		 	DefaultMutableTreeNode root = new DefaultMutableTreeNode(new UserObjectWrapper(new UserObject("1.0","Root","0")));
 			
 		 	for(int i = 1; i < 7; i++)

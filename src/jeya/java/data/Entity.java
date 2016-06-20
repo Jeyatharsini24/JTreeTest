@@ -5,7 +5,14 @@ public class Entity {
 	private String arg2;
 	private String arg3;
 	private String userObjectID;
+	private boolean disableEdit;
 	
+	public boolean isDisableEdit() {
+		return disableEdit;
+	}
+	public void setDisableEdit(boolean disableEdit) {
+		this.disableEdit = disableEdit;
+	}
 	public Entity() {
 		super();
 	}

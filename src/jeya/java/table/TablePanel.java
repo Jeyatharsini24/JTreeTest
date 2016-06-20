@@ -33,7 +33,7 @@ public class TablePanel extends JPanel implements Observer{
 		this.setLayout(new GridBagLayout());
 		table = new JTable();
 		table.setBackground(new Color(219,180,143));
-		String[]column = new String[]{"Arg1","Arg2","Arg3"};
+		String[]column = new String[]{"UserObjectID", "Arg1","Arg2","Arg3"};
 		model = new TableModel(column,0);
 		EvenOddRenderer renderer = new EvenOddRenderer();
 		table.setDefaultRenderer(Object.class, renderer);
@@ -75,8 +75,16 @@ public class TablePanel extends JPanel implements Observer{
 			if(selectedRow != -1) // if not selected
 			{
 				Entity entity = model.getEntityAt(selectedRow);
-				setChanged();
-				notifyObservers(entity);
+				if(entity.isDisableEdit())
+				{
+					setChanged();
+					notifyObservers(entity);
+				}
+				else
+				{
+					setChanged();
+					notifyObservers(entity);
+				}
 			}
 		}
 	}

@@ -6,8 +6,21 @@ import jeya.java.data.UserObject;
 
 public class TreeDataProvider {
 	private static Hashtable<String,UserObject>treeDummyData;
+	private static TreeDataProvider instance;
 	
-	public static Hashtable<String,UserObject> getDummyUserObjects()
+	private TreeDataProvider()
+	{
+		generateDummyUserObjects();
+	}
+	
+	public static TreeDataProvider getInstance(){
+		if(instance == null)
+		{
+			instance = new TreeDataProvider();
+		}
+		return instance;
+	}
+	public void generateDummyUserObjects()
 	{
 		treeDummyData = new Hashtable<String,UserObject>();
 		for(int i = 1; i < 7; i++)
@@ -28,6 +41,10 @@ public class TreeDataProvider {
 				treeDummyData.put(_key, new UserObject(_userObjectID,_arg2,_arg3));
 			}
 		}
+	}
+
+	public Hashtable<String, UserObject> getDummyUserObjects() {
+		// TODO Auto-generated method stub
 		return treeDummyData;
 	}
 }
